@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<body>
+
+   <div class="contet" id="datapreview"></div>
+    
+    <script>
+
+        var usrdata = [];
+
+    function viewData(){
+       var cartona = ``;
+        for(var i=0 ; i<usrdata.length ; i++){
+            cartona +=` <div class="data">
+            <p>Email : ${usrdata[i].email}</p>
+                        <img src="${usrdata[i].avatar}"></div>`;
+        }
+
+        document.getElementById("datapreview").innerHTML= cartona;
+    }
+    
+
+async function DisplayData(){
+    var apiResponse= await fetch(`https://reqres.in/api/users?page=2`);
+    var responseData = await apiResponse.json();
+    usrdata=responseData.data;
+    console.log(usrdata);
+    viewData();
+}
+DisplayData();
+    </script>
+</body>
+</html>
